@@ -9,6 +9,6 @@ it contains in order:
 4. Targetable_phenotypes.R: Create upset plots of targetable phenotypic features
 5. Create_Upset_plot.R: Create upset plots on patient and NDD level and to calculate how many patients one can treat with a single AON
 
-All data generated or analyzed during this study are included in the published article [and its supplementary information files]. All original datasets can be retrieved from the public resources listed in the work. Datasets from different sources were integrated and deduplicated using a combination of code and manual curation. Thus, the standalone code is not sufficient to regenerate created datasets, this code is therefore not included in this repository.
+The NDD dataset analysed in this work (as used in find_targetable_lncRNAs_clinvar2.R is listed in the files folder). This NDD dataset is a combined dataset from different sources that were integrated and deduplicated using a combination of code and manual curation. Thus, the standalone code is not sufficient to regenerate created datasets, this code is therefore not included in this repository. All original datasets can be retrieved from the public resources listed in (Wijnant et al. 2025) https://www.biorxiv.org/content/10.1101/2025.03.20.644369v1. 
 
 Please cite: [link & citation available upon publication] or https://www.biorxiv.org/content/10.1101/2025.03.20.644369v1
