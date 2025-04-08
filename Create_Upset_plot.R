@@ -83,7 +83,8 @@ sets <- c("HPO_targetable", "LoF", "pLI","AD", "lncRNA", "ARE_3UTR", "uORF", "TA
 Clinvar_for_upset_select <- Clinvar_for_upset[Clinvar_source_score_select,]
 Clinvar_for_upset_select[,8:20] <- sapply(Clinvar_for_upset_select[,8:20], \(x) + as.logical(x))
 upset_all_ClinVar <- upset(data = Clinvar_for_upset_select[1:50,], intersect = sets, intersections = intersections,
-                           mode = "intersect", sort_intersections = FALSE, sort_sets = FALSE, set_sizes=FALSE) #only 1:50 to avoid crashing of the upsetplot
+                           mode = "intersect", sort_intersections = FALSE, sort_sets = FALSE, set_sizes=FALSE) #only 1:50 to avoid crashing upset function
+
 #create barplot to combine with upset plot with all the data
 Clinvar_for_upset_select$zero <- 0
 intersections_n <- c()
@@ -97,7 +98,7 @@ for_barplot_df$int_as_string <- factor(for_barplot_df$int_as_string, levels = fo
 barplot_all_ClinVar <- ggplot(data = for_barplot_df, aes(x = int_as_string, y = intersections_n)) +
   geom_bar(stat = "identity") + 
   theme(axis.text.x = element_text(angle = 90))
-for_barplot_df$percent <- for_barplot_df$intersections_n/sum(as.numeric(Clinvar_for_upset_select$num_submit[]))*100
+for_barplot_df$percent <- for_barplot_df$intersections_n/sum(as.numeric(Clinvar_for_upset_select$num_submit[]))*100 #barplot can be combined with upset plot figure to create a full upset plot without crashing of upset function for a high number of combinations
 
 
 #get disease impact
@@ -135,8 +136,8 @@ GUI_ARE <- NDD_database_targetable$Gene_Disease_UI[rowSums(NDD_database_targetab
 GUI_lncRNA <- NDD_database_targetable$Gene_Disease_UI[rowSums(NDD_database_targetable[,c("lncRNA", "AD", "pLI", "perc_LoF_0.2", "HPO_targetable")]) == 5]
 treatable_GUI <- unique(c(GUI_splice, GUI_fsrestore, GUI_inframe, GUI_TANGO, GUI_uORF, GUI_ARE, GUI_lncRNA))
 treatable_GUI_sc3 <- intersect(treatable_GUI, select_GUI)
-length(treatable_GUI) #696 -> 679
-length(treatable_GUI_sc3) #628 -> 619
+length(treatable_GUI) #number of targetable NDDs
+length(treatable_GUI_sc3) #number of targetable NDDs with source score of higher then 3
 
 
 #get the number of overall treatable Clinvar submittions (union of all strategies)
@@ -149,9 +150,8 @@ GUI_uORF <- Clinvar_for_upset_select$AlleleID[rowSums(Clinvar_for_upset_select[,
 GUI_ARE <- Clinvar_for_upset_select$AlleleID[rowSums(Clinvar_for_upset_select[,c("ARE_3UTR", "AD", "HPO_targetable", "LoF")]) == 4]
 GUI_lncRNA <- Clinvar_for_upset_select$AlleleID[rowSums(Clinvar_for_upset_select[,c("lncRNA", "AD", "HPO_targetable", "LoF")]) == 4]
 treatable_ID <- unique(c(GUI_splice, GUI_fsrestore, GUI_inframe, GUI_TANGO, GUI_uORF, GUI_ARE, GUI_lncRNA))
-sum(as.numeric(Clinvar_for_upset_select$num_submit[Clinvar_for_upset_select$AlleleID %in% treatable_ID])) #23158
-sum(as.numeric(Clinvar_for_upset_select$num_submit)) #125380
-length(treatable_ID) #922 13691
+sum(as.numeric(Clinvar_for_upset_select$num_submit[Clinvar_for_upset_select$AlleleID %in% treatable_ID])) #number of targetable ClinVar submittions
+sum(as.numeric(Clinvar_for_upset_select$num_submit)) #total number of targetable ClinVar submittions
 
 #number of patients treatable with a single AON
 Clinvar_targetable_select <- Clinvar_targetable[Clinvar_source_score_select,]
@@ -214,6 +214,7 @@ for (allele_ID in GUI_fsrestore){
   }
 }
 table(aons)
+
 ## targetable frameshift splice mutations
 skips_exon_or_intron_retention <- function(allele_ID){
   row <- Clinvar_targetable_select[Clinvar_targetable_select$AlleleID == allele_ID,]
