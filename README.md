@@ -1,4 +1,4 @@
-# NDD_targetability
+# NDD targetability
 Code used in "systematic analysis of genetic and phenotypic characteristics reveals antisense oligonucleotide therapy potential for one-third of neurodevelopmental disorders" (Wijnant et al. 2025)
 
 This repository contains all code to reanalyse the targetability of the NDD dataset published in (Wijnant et al. 2025) https://www.biorxiv.org/content/10.1101/2025.03.20.644369v1
