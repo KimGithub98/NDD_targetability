@@ -11,4 +11,6 @@ The scripts should be adapted and used in the following order:
 6. Add_ClinVar_data.R script (Ensembl VEP tool needs to be used multiple times in this script)
 7. Add_externallinks_and_prot_length_to_NDDdataset.R script (requires manual assessment)
 
-These files should match the format of NDD_dataset_VEP and ClinVar_VEP_select_NDD_only in NDD_targetability/files and can be used as input for the scripts to assess NDD-AON targetability
+These files should match the format of NDD_dataset_VEP and ClinVar_variants_NDDonly* in NDD_targetability/files and can be used as input for the scripts to assess NDD-AON targetability
+
+*due to the size of this file, this file can only be obtained when contacting the corresponding author
