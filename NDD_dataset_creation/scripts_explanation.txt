@@ -2,7 +2,7 @@ This folder contains the scripts used to generate the NDD dataset.
 
 Please note that the format and content of files downloaded from sysNDD, HPO, DDG2P, MR & EPI RadboudUMC gene panels, ClinVar, and OMIM may change over time. Additionally, some steps in the scripts require manual assessment. As a result, the scripts may not fully reproduce the original results. For instructions on how to retrieve the files used to generate the datasets, please refer to the paper cited in the README files.
 
-The scripts should be adapted and used in the following order:
+The scripts should be adapted to the current downloadable format and used in the following order:
 1. Clean and add [HPO/DDG2P/MR EPI/sysNDD files].R scripts
 2. Manually assess and addapt output files from the previous step when neccesary using the manual assessment output files generated in the Clean_and_add scripts. 
 3. combine_DDG2P_HPO_RUMC_genepanels_sysNDD_for_NDD_dataset.R script using the manual assessed files from the previous step
