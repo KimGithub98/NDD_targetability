@@ -1,1 +1,3 @@
 NDD_dataset_VEP: NDD dataset (clinvar, NDDs combined) was used as input for find_targetable_lncRNA.R script
+
+Due to the size of the clinvar_variants_NDDonly file this file can only be obtained when contacting the corresponding author of the paper cited in the README file
